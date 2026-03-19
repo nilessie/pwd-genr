@@ -32,15 +32,35 @@ def get_pwd_type():
         
 # Generate password based on the pwd_type (custom or random)
 def generat_pwd(pwd_length, pwd_type):
+    conf_dic = {
+        "1": SPECIAL_CHARS,
+        "2": NUMERIC_CHARS,
+        "3": UPPERCASE_LETTER_CHARS,
+        "4": LOWERCASE_LETTER_CHARS
+    }
+
     if pwd_type == "c":
-        pass            
+        usr_conf_options = input(
+            "Special characters [1]\n"
+            "Numeric characters [2]\n"
+            "UPPER CASE CHARACTERS [3]\n"
+            "lower case characters [4]\n"
+            "What characters do you wish to include: "
+            )     
+        
+        custom_pwd_str = ""
+
+        for i in usr_conf_options:
+            if i in conf_dic:
+                custom_pwd_str += conf_dic[i]
+        
+        return ''.join(secrets.choice(custom_pwd_str) for i in range(pwd_length))
+     
 
     if pwd_type == "r":
         rand_pwd_str = SPECIAL_CHARS + NUMERIC_CHARS + LOWERCASE_LETTER_CHARS + UPPERCASE_LETTER_CHARS
         return ''.join(secrets.choice(rand_pwd_str) for i in range(pwd_length)) 
         
-    
-
 
 if __name__ == "__main__":
     main()
