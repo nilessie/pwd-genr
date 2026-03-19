@@ -17,7 +17,7 @@ def main():
     
     if pwd_type == "c":
         gened_pwd = generate_custom_pwd(pwd_length)
-    if pwd_type == "r":
+    elif pwd_type == "r":
         gened_pwd = generate_rand_pwd(pwd_length)
 
     console.print(f"\n[yellow]your generated password is:[/yellow] [blue]{gened_pwd}")
@@ -72,7 +72,7 @@ def generate_custom_pwd(pwd_length):
                 custom_pwd_str += conf_dic[i]
 
         if custom_pwd_str == "":
-            print("Error: Select at least one valid option")
+            console.print("Error: Select at least one valid option", style="red")
         else:
             return ''.join(secrets.choice(custom_pwd_str) for i in range(pwd_length))
 
